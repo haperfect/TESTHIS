@@ -563,6 +563,7 @@ public class TestLuongBHYT_13875 extends TiepNhanBenhNhan {
 	@AfterTest
 	public void ketThucLuong7() {
 		dangXuatKhoiTaikhoan();
+		thoatUngdungHIS();
 	}
 
 }

@@ -401,6 +401,7 @@ public class TestLuongBHYT_13910 extends TiepNhanBenhNhan {
 	public void ketThucLuong9()
 	{
 		dangXuatKhoiTaikhoan();
+		thoatUngdungHIS();
 	}
 
 }

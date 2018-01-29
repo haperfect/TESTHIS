@@ -496,6 +496,7 @@ public class TestLuongBHYT_13856 extends TiepNhanBenhNhan {
 	public void ketThucLuong2()
 	{
 		dangXuatKhoiTaikhoan();
+		thoatUngdungHIS();
 	}
 				
 		
