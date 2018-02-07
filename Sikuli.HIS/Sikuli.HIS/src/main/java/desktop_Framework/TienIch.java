@@ -15,10 +15,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -261,5 +265,27 @@ public class TienIch {
 			TestLogger.warn("Error when execute command line: " + cmd);
 		}
 	}
+	public static List<String> getSoTuChuoi(String chuoiCanLocSo,int doDaiSoCanLayRa)
+	 {
+	  
+	  Pattern p = Pattern.compile("-?\\d{"+doDaiSoCanLayRa+"}");
+	        List<String> numbers = new ArrayList<String>();
+	        Matcher m = p.matcher(chuoiCanLocSo);
+	      
+	          while (m.find()) {  
+	                 numbers.add(m.group());  
+	               
+	          }
+	          
+	         if (numbers.size()>=0) 
+	         {
+	          return numbers;
+	         }
+	         else
+	         {
+	          return null;
+	         }
+	              
+	 }
 
 }

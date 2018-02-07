@@ -31,6 +31,7 @@ public class FormCapNhatThongTinHanhChinh extends HisActions {
 	public static String FormCapNhatThongTinHanhChinh_MessageLoi = "FormCapNhatThongTinHanhChinh_MessageLoi.png";
 	public static String FormCapNhatThongTinHanhChinh_SapXepTinh = "FormCapNhatThongTinHanhChinh_SapXepTinh.png";
 	public static String FormCapNhatThongTinHanhChinh_CloseForm = "FormCapNhatThongTinHanhChinh_CloseForm.png";
+	public static String FormCapNhatThongTinHanhChinh_Menu = "FormCapNhatThongTinHanhChinh_Menu.png";
 	
 	
 	

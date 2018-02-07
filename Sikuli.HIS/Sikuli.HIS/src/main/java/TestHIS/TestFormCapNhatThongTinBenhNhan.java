@@ -41,11 +41,11 @@ public class TestFormCapNhatThongTinBenhNhan extends FormCapNhatThongTinHanhChin
 		TestLogger.info("thông tin trên Màn hình Cập nhật thông tin HC là NULL");
 		s.type("u", Key.CTRL);
 		if (getSoTiepNhan1().equals("")) {
-			// s.type("F4", Key.ALT);
+			// s.type(Key.F4, Key.ALT);
 			setTestcaseStatus("PASS", "thông tin trên Màn hình Cập nhật thông tin HC là NULL");
 
 		} else {
-			// s.type("F4", Key.ALT);
+			// s.type(Key.F4, Key.ALT);
 			setTestcaseStatus("FAIL", "thông tin trên Màn hình Cập nhật thông tin HC # NULL");
 		}
 	}
@@ -128,11 +128,11 @@ public class TestFormCapNhatThongTinBenhNhan extends FormCapNhatThongTinHanhChin
 		}
 		if (getSoDienThoaiNguoiLienHe1().equalsIgnoreCase("1542370677")) {
 			clickToaDo(986, 177);
-			// s.type("F4", Key.ALT);
+			// s.type(Key.F4, Key.ALT);
 			setTestcaseStatus("PASS", "Hiển thị Số điện thoại thành công");
 		} else {
 			clickToaDo(986, 177);
-			// s.type("F4", Key.ALT);
+			// s.type(Key.F4, Key.ALT);
 			setTestcaseStatus("FAIL", "Hiển thị số điện thoại không thành công");
 		}
 	}
