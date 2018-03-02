@@ -33,7 +33,7 @@ public class TestLuongBHYT_13853 extends TiepNhanBenhNhan {
 	FormXacNhanBaoHiemYTe yt = new FormXacNhanBaoHiemYTe();
 
 	// Login bằng tài khoản TD01 de tiếp nhận bệnh nhân vào khám
-	//@BeforeTest
+	@BeforeTest
 	public void dieukienDauTien() {
 
 		if (his.khoiDongHIS(HisActions.DUONG_DAN_FILE_CHAY_HIS) == true) {
@@ -118,20 +118,21 @@ public class TestLuongBHYT_13853 extends TiepNhanBenhNhan {
 		s.type(Key.TAB);
 
 		TestLogger.info("Điền hình thức khám");
-		HinhThuc = "Tự đến";
+		HinhThuc = "Cơ quan y tế giới thiệu";
 		chonHinhThuc(HinhThuc);
 		TestLogger.info("Chon lý do khám");
 		LiDo = "Khám bệnh";
 		dienLiDo(LiDo);
 
 		TestLogger.info("Điền số thẻ BHYT 80");
+		//sotheBHYT = "SV4919009012223";
 		sotheBHYT = "SV491" + taoRandomSo(10);
 		dienSoTheBHYT(sotheBHYT);
 		s.type(Key.ENTER);
 
 		TestLogger.info("Dien ma dang ki KCBBD");
 		dienMaDKKCB("01005");
-		// s.type(Key.ENTER);
+		s.type(Key.ENTER);
 
 		sleep(4);
 		TestLogger.info("chon khu vuc");
@@ -140,12 +141,15 @@ public class TestLuongBHYT_13853 extends TiepNhanBenhNhan {
 		s.type(Key.ENTER);
 
 		TestLogger.info("Chon tu ngay");
-		dienTuNgay("30/12/2016");
+		dienTuNgay("30122016");
 		s.type(Key.ENTER);
 
+		
 		TestLogger.info("Chon den ngay");
-		dienDenNgay("30/12/2018");
-		s.type(Key.ENTER);
+		String denngay = TienIch.getNgayHienTaicuaMayTinh() + TienIch.getThangHienTaicuaMayTinh() + (Integer.parseInt(TienIch.getNamHienTaicuaMayTinh())+1);
+		TestLogger.info("den ngay la" +denngay);
+		dienDenNgay(denngay);
+		//s.type(Key.ENTER);
 		sleep(4);
 		s.type(Key.TAB);
 		sleep(3);
@@ -157,14 +161,15 @@ public class TestLuongBHYT_13853 extends TiepNhanBenhNhan {
 
 		TestLogger.info("Nhap so chuyen tuyen");
 		dienSoTuyenChuyen("012");
-		s.type(Key.TAB);
+			s.type(Key.TAB);
 
 		TestLogger.info("Nhap ngay chuyen");
-		dienNgayChuyen("16/11/2017");
+		String ngaychuyen = TienIch.getNgayThangNamHienTaicuaMayTinh();
+		dienNgayChuyen(ngaychuyen);
 		s.type(Key.TAB);
 
 		TestLogger.info("Nhap tuyen chuyen");
-		dienTuyenChuyen("BV Bạch Mai");
+		dienTuyenChuyen("Tuyến dưới liền kề");
 		s.type(Key.TAB);
 
 		TestLogger.info("Nhap ly do chuyen");
@@ -193,11 +198,13 @@ public class TestLuongBHYT_13853 extends TiepNhanBenhNhan {
 
 		if (waitForObjectPresent(Phieukham, 5)) {
 			s.type(Key.F4, Key.ALT);
-			setTestcaseStatus("PASS", "Tiếp nhận Bệnh nhân thành công !");
-		} else {
-
-			setTestcaseStatus("FAIL", "Tiếp nhận Bệnh nhân không thành công !");
+			}
+		if(getHoten().equals("")) {
+			setTestcaseStatus("PASS", "Tiếp nhận bệnh nhân thành công");
+		}else {
+			setTestcaseStatus("FAIL", "Tiếp nhận bệnh nhân không thành công");
 		}
+			
 	}
 
 	// Kiem tra benh nhan da có trong danh sach kham benh hay chua
@@ -336,8 +343,8 @@ public class TestLuongBHYT_13853 extends TiepNhanBenhNhan {
 		// Log out tai khoan cu,
 		clickOn(TiepNhanBenhNhan_HeThong);
 		clickOn(TiepNhanBenhNhan_DangXuat);
-		clickOn(TiepNhanBenhNhan_HeThong);
-		clickOn(TiepNhanBenhNhan_DangNhap);
+		//clickOn(TiepNhanBenhNhan_HeThong);
+		//clickOn(TiepNhanBenhNhan_DangNhap);
 
 		// Dang nhap tai khoan BS01
 		dangNhapHIS(FormKhuVuc.ten_dangNhap_BS01, FormKhuVuc.matKhau_dangNhap_BS01);
@@ -425,59 +432,24 @@ public class TestLuongBHYT_13853 extends TiepNhanBenhNhan {
 		s.click();
 		waitForObjectPresent(FormKhamBenh.FormKhamBenh_HuongDieuTri_ChoVeKeToa, 5);
 		clickOn(FormKhamBenh.FormKhamBenh_HuongDieuTri_ChoVeKeToa);
-		// Chọn Kho thuốc
-		TestLogger.info("Chọn kho thuốc:");
-		s.type(Key.TAB);
-		sleep(3);
-		s.type(Key.TAB);
-		sleep(2);
-		s.type(Key.TAB);
-		sleep(1);
-		s.type(Key.TAB);
-		sleep(2);
-		s.type(Key.TAB);
-		// chọn tọa độ kho thuốc
-		clickToaDo(348, 414);
-		sleep(1);
-		clickToaDo(348, 414);
-		waitForObjectPresent(FormKhamBenh.FormKhamBenh_KhoThuocNgoaiTru, 5);
-		clickOn(FormKhamBenh.FormKhamBenh_KhoThuocNgoaiTru);
-
-		// Chọn nguồn thuốc
-		TestLogger.info("Chọn nguon thuốc:");
-		sleep(2);
-		clickToaDo(467, 415);
-		sleep(1);
-		clickToaDo(467, 415);
-		waitForObjectPresent(FormKhamBenh.FormKhamBenh_NguonThuocDauThau, 5);
-		clickOn(FormKhamBenh.FormKhamBenh_NguonThuocDauThau);
-		// Chọn tên thuốc
-		sleep(3);
-		TestLogger.info("Chọn ten thuốc:");
-		clickToaDo(786, 413);
-		sleep(1);
-		clickToaDo(786, 413);
-		waitForObjectPresent(FormKhamBenh.FormKhamBenh_TenThuocEpocassa, 5);
-		clickOn(FormKhamBenh.FormKhamBenh_TenThuocEpocassa);
-		// Chọn số lượng
-		soLuongThuoc = "12";
-		kb.dienSoLuongThuoc(soLuongThuoc);
+		
+		//chọn kho thuốc và thuốc
+		//chọn tên thuốc
+		clickToaDo(554, 433);
+		kb.dienTenThuoc("Acid amin");
 		s.type(Key.ENTER);
-		// s.type(Key.TAB);
-		// Chọn liều dùng
-		sleep(3);
-		lieuDung = "Ngày 4 viên, chia 2 lần";
-		kb.dienLieuDung(lieuDung);
-		sleep(2);
-		waitForObjectPresent(FormKhamBenh.FormKhamBenh_LuuVaHoanThanh, 3);
-
+		//Số lượng thuốc 20
+		s.type("20");
+		//điền liều dùng
+		kb.dienLieuDung("Ngày 4 viên chia 2 lần");
+		waitForObjectPresent(FormKhamBenh.FormKhamBenh_LuuVaHoanThanh, 5);
 		clickOn(FormKhamBenh.FormKhamBenh_LuuVaHoanThanh);
-
+			
 		if (waitForObjectPresent(HisActions.HIS_LOI_UNGDUNG, 3)) {
-			s.type(Key.TAB);
-			setTestcaseStatus("FAILSE", "KHÔNG LƯU ĐƯỢC KẾT LUẬN, ĐÃ GẶP SỰ CỐ!");
+			s.type(Key.ENTER);
+			setTestcaseStatus("FAIL", "KHÔNG LƯU ĐƯỢC KẾT LUẬN, ĐÃ GẶP SỰ CỐ!");
 		} else {
-			setTestcaseStatus("TRUE", "LƯU KẾT LUẬN THÀNH CÔNG!");
+			setTestcaseStatus("PASS", "LƯU KẾT LUẬN THÀNH CÔNG!");
 		}
 	}
 
@@ -507,9 +479,9 @@ public class TestLuongBHYT_13853 extends TiepNhanBenhNhan {
 		clickOn(FormXacNhanBaoHiemYTe.FormXacNhanBaoHiemYTe_Xacnhan);
 		if (waitForObjectPresent(FormXacNhanBaoHiemYTe.FormXacNhanBaoHiemYTe_dongy, 5)) {
 			s.type(Key.ENTER);
-			setTestcaseStatus("Pass", "Xac nhan BHYT thành cong!");
+			setTestcaseStatus("PASS", "Xac nhan BHYT thành cong!");
 		} else {
-			setTestcaseStatus("False", "Xac nhan BHYT khong thanh cong");
+			setTestcaseStatus("FAIL", "Xac nhan BHYT khong thanh cong");
 		}
 
 	}
@@ -521,9 +493,9 @@ public class TestLuongBHYT_13853 extends TiepNhanBenhNhan {
 		TestLogger.info("thanh toan vien phi");
 		waitForObjectPresent(MenuVienPhi, 5);
 		clickOn(HisActions.MenuVienPhi);
-		waitForObjectPresent(SubMenuThanhToanVienPhi, 4);
-		clickOn(HisActions.SubMenuThanhToanVienPhi);
-
+		moveMouseDownFromLogo(HisActions.MenuVienPhi, 20);
+		s.click();
+	
 		vpnt.nhapChungTu();
 		sleep(4);
 		vpnt.dienSoTiepNhan(SoTiepNhan);
@@ -538,7 +510,6 @@ public class TestLuongBHYT_13853 extends TiepNhanBenhNhan {
 				setTestcaseStatus("FAIL", "Không thể lưu kết quả thanh toán Viện phí , đã gặp sự cố !");
 			} else {
 				setTestcaseStatus("PASS", "Đã Lưu được kết quả thanh toán Viện phí ! ");
-
 			}
 		} else {
 			setTestcaseStatus("FAIL",
@@ -549,7 +520,7 @@ public class TestLuongBHYT_13853 extends TiepNhanBenhNhan {
 
 
 
-	@AfterTest
+	//@AfterTest
 	public void ketThucLuong1() {
 		dangXuatKhoiTaikhoan();
 		thoatUngdungHIS();

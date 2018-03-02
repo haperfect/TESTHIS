@@ -35,7 +35,7 @@ public class TestLuongBHYT_13910 extends TiepNhanBenhNhan {
 	FormXacNhanBaoHiemYTe yt = new FormXacNhanBaoHiemYTe();
 
 	// Login bằng tài khoản TD01 de tiếp nhận bệnh nhân vào khám
-	// @BeforeTest
+	 @BeforeTest
 	public void dieukienDauTien() {
 
 		if (his.khoiDongHIS(HisActions.DUONG_DAN_FILE_CHAY_HIS) == true) {
@@ -108,15 +108,7 @@ public class TestLuongBHYT_13910 extends TiepNhanBenhNhan {
 		s.type(Key.TAB);
 
 		// 2.CHỌN ĐỐI TƯỢNG
-		TestLogger.info("Điền đối tượng");
-		DoiTuong = "BHYT 80%";
-		clickToaDo(218, 277);
-		waitForObjectPresent(TiepNhanBenhNhan_BHYT80, 5);
-		clickOn(TiepNhanBenhNhan_BHYT80);
-
-		s.type(Key.TAB);
-		sleep(5);
-		s.type(Key.TAB);
+		dienDoiTuong("BHYT 100%");
 
 		TestLogger.info("Điền hình thức khám");
 		HinhThuc = "Tự đến";
@@ -132,7 +124,7 @@ public class TestLuongBHYT_13910 extends TiepNhanBenhNhan {
 
 		TestLogger.info("Dien ma dang ki KCBBD");
 		dienMaDKKCB("01005");
-		// s.type(Key.ENTER);
+		 s.type(Key.ENTER);
 
 		sleep(4);
 		TestLogger.info("chon khu vuc");
@@ -141,11 +133,13 @@ public class TestLuongBHYT_13910 extends TiepNhanBenhNhan {
 		s.type(Key.ENTER);
 
 		TestLogger.info("Chon tu ngay");
-		dienTuNgay("30/12/2016");
+		dienTuNgay("30122016");
 		s.type(Key.ENTER);
 
 		TestLogger.info("Chon den ngay");
-		dienDenNgay("30/12/2018");
+		String denngay = TienIch.getNgayHienTaicuaMayTinh() + TienIch.getThangHienTaicuaMayTinh() + (Integer.parseInt(TienIch.getNamHienTaicuaMayTinh())+1);
+		TestLogger.info("den ngay la" +denngay);
+		dienDenNgay(denngay);
 		s.type(Key.ENTER);
 		sleep(4);
 		s.type(Key.TAB);
@@ -161,11 +155,12 @@ public class TestLuongBHYT_13910 extends TiepNhanBenhNhan {
 		s.type(Key.TAB);
 
 		TestLogger.info("Nhap ngay chuyen");
-		dienNgayChuyen("16/11/2017");
+		String ngaychuyen = TienIch.getNgayThangNamHienTaicuaMayTinh();
+		dienNgayChuyen(ngaychuyen);
 		s.type(Key.TAB);
-
+		
 		TestLogger.info("Nhap tuyen chuyen");
-		dienTuyenChuyen("BV Bạch Mai");
+		dienTuyenChuyen("Tuyến dưới liền kề");
 		s.type(Key.TAB);
 
 		TestLogger.info("Nhap ly do chuyen");
@@ -194,11 +189,13 @@ public class TestLuongBHYT_13910 extends TiepNhanBenhNhan {
 
 		if (waitForObjectPresent(Phieukham, 5)) {
 			s.type(Key.F4, Key.ALT);
-			setTestcaseStatus("PASS", "Tiếp nhận Bệnh nhân thành công !");
-		} else {
-
-			setTestcaseStatus("FAIL", "Tiếp nhận Bệnh nhân không thành công !");
+			}
+		if(getHoten().equals("")) {
+			setTestcaseStatus("PASS", "Tiếp nhận bệnh nhân thành công");
+		}else {
+			setTestcaseStatus("FAIL", "Tiếp nhận bệnh nhân không thành công");
 		}
+			
 	}
 
 	// Kiem tra benh nhan da có trong danh sach kham benh hay chua
@@ -316,6 +313,7 @@ public class TestLuongBHYT_13910 extends TiepNhanBenhNhan {
 
 		if (getLiDo().equalsIgnoreCase(LiDo)) {
 			setTestcaseStatus("PASS", "LiDo");
+			
 		} else {
 			setTestcaseStatus("FAIL", "LiDo");
 		}
@@ -327,6 +325,36 @@ public class TestLuongBHYT_13910 extends TiepNhanBenhNhan {
 		}
 
 	}
+	// Thoat khoi tai khoan TD01 => chuyen sang Tai khoan BS01 de kham cho benh
+		// nhan co
+		// so tiep don benh nhan da dang ki o tren
+		@Test(priority = 3)
+		public void BHYT_13910_2_2() {
+
+			// Log out tai khoan cu,
+			clickOn(TiepNhanBenhNhan_HeThong);
+			clickOn(TiepNhanBenhNhan_DangXuat);
+			//clickOn(TiepNhanBenhNhan_HeThong);
+			//clickOn(TiepNhanBenhNhan_DangNhap);
+			// Dang nhap tai khoan BS01
+			dangNhapHIS(FormKhuVuc.ten_dangNhap_BS01, FormKhuVuc.matKhau_dangNhap_BS01);
+			chonPhongLamViec("Khám theo yêu cầu");
+			waitForObjectPresent(HisActions.HIS_MenuKhamBenh, 5);
+			sleep(6);
+			clickOn(HisActions.HIS_MenuKhamBenh);
+			clickToaDo(215, 73);
+			sleep(2);
+			kb.dienSoTiepNhan(SoTiepNhan);
+			kb.clickTimKiem();
+			if (waitForObjectPresent(FormKhamBenh.FormKhamBenh_soDongBang1, 5)) {
+				hoverImage(FormKhamBenh.FormKhamBenh_LamMoi);
+				moveMouseDownFromLogo(FormKhamBenh.FormKhamBenh_TimKiem, 95);
+				s.doubleClick();
+				setTestcaseStatus("PASS", "Đã tìm thấy bệnh nhân đang chờ khám !");
+			} else {
+				setTestcaseStatus("FAIL", "Không tìm thấy bệnh nhân đang chờ khám !");
+			}
+		}
 
 	// BS01 đo chỉ số sinh tồn cho bệnh nhân
 	@Test(priority = 4)

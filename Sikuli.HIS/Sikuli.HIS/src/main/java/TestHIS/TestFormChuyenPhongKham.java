@@ -1,6 +1,7 @@
 package TestHIS;
 
 import org.sikuli.script.Key;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -14,7 +15,7 @@ public class TestFormChuyenPhongKham extends FormChuyenPhongKham {
 	public String soTiepNhan1, PhongKham;
 	HisActions his = new HisActions();
 
-	 @BeforeTest
+	@BeforeTest
 	public void dieukienDauTien() {
 		if (his.khoiDongHIS(HisActions.DUONG_DAN_FILE_CHAY_HIS) == true) {
 			his.dangNhapHIS(FormKhuVuc.ten_dangNhap_admin, FormKhuVuc.matKhau_dangNhap_admin);
@@ -103,12 +104,12 @@ public class TestFormChuyenPhongKham extends FormChuyenPhongKham {
 		TestLogger.info(" Kiểm tra nhập số tiếp nhận không ở trạng thái chờ kết quả/đã hoàn thành ");
 		TestLogger.info("Hệ thống hiển thị đầy đủ thông tin bệnh nhân");
 		// THông tin bệnh nhân Test
-		// Số TN: 1801000104, mã bệnh nhân: 18000089
-		// Họ Tên: NGUYEN VIET HAIFJIM
+		// Số TN: 1802000133, mã bệnh nhân: 18000339
+		// Họ Tên: NGUYEN VIET HAZVAPA
 		// Năm sinh: 2018, giới tính nữ, đối tượng Dịch vụ, địa chỉ Phường Quang Trung,
 		// Thành phố Phủ Lý, Tỉnh Hà Nam
 		// Dịch vụ: Khám Tai mũi họng, phòng khám trước TMH
-		dienSoTiepNhan1("1801000104");
+		dienSoTiepNhan1("1802000133");
 		// Lấy ra mã Bệnh nhân
 		String laytext1 = layTextTuAnh(265, 92, 80, 18);
 		// Lấy ra Họ Tên, Họ tên trả về "MEN VIEr HAIFJIH = NGUYEN VIET HAIFJIM
@@ -128,12 +129,12 @@ public class TestFormChuyenPhongKham extends FormChuyenPhongKham {
 		// Lấy ra phòng khám trước - Khém TMH
 		String laytext9 = layTextTuAnh(704, 208, 82, 18);
 
-		if (laytext1.trim().equals("18000089")) {
+		if (laytext1.trim().equals("18000339")) {
 			setTestcaseStatus("PASS", "Lấy ra đúng thông tin mã bệnh nhân");
 		} else {
 			setTestcaseStatus("FAIL", "Lấy ra không đúng thông tin mã bệnh nhân");
 		}
-		if (laytext2.trim().equals("\"MEN VIEr HAIFJIH")) {
+		if (laytext2.trim().equals("\"MEN VIEr HAIVAPA")) {
 			setTestcaseStatus("PASS", "Lấy ra đúng thông tin tên bệnh nhân");
 		} else {
 			setTestcaseStatus("FAIL", "Lấy ra không đúng thông tin tên bệnh nhân");
@@ -241,13 +242,10 @@ public class TestFormChuyenPhongKham extends FormChuyenPhongKham {
 			setTestcaseStatus("FAIL", " Người chuyển # Blank");
 		}
 	}
-	//@Test(priority = 10)
-	public void chuyenPhongKham_15357_2() {
-		TestLogger.info("[Đăng ký khám_Validate]Kiểm tra trường Người chuyển");
-		TestLogger.info("Kiểm tra giá trị mặc định TH BN đã được chuyển");
-		TestLogger.info(" Người chuyển = Blank");
-		dienSoTiepNhan1("1801000217");
-		
-		
-}
+	@AfterTest
+	public void ketThucForm() {
+		dangXuatKhoiTaikhoan();
+		thoatUngdungHIS();
+	}
+
 }

@@ -29,6 +29,7 @@ public class TestFormCapNhatThongTinBenhNhan extends FormCapNhatThongTinHanhChin
 		if (his.khoiDongHIS(HisActions.DUONG_DAN_FILE_CHAY_HIS) == true) {
 			his.dangNhapHIS(FormKhuVuc.ten_dangNhap_admin, FormKhuVuc.matKhau_dangNhap_admin);
 			his.chonPhongLamViec("Khám TMH");
+			
 			moMenuTiepNhanBenhNhan();
 		} else
 			setTestcaseStatus("FAIL", "Không thể khởi động ứng dụng HIS !");
@@ -39,13 +40,18 @@ public class TestFormCapNhatThongTinBenhNhan extends FormCapNhatThongTinHanhChin
 		TestLogger.info("[Cập nhật_Validate]Kiểm tra Validate trường Số TN");
 		TestLogger.info("Kiểm tra giá trị mặc định Khi chưa có thông tin BN từ màn hình Tiếp nhận");
 		TestLogger.info("thông tin trên Màn hình Cập nhật thông tin HC là NULL");
+		//waitForObjectPresent(HIS_MenuTiepNhan, 5);
+		//clickOn(HIS_MenuTiepNhan);
+		//waitForObjectPresent(FormCapNhatThongTinHanhChinh_Menu, 5);
+		//clickOn(FormCapNhatThongTinHanhChinh_Menu);
 		s.type("u", Key.CTRL);
-		if (getSoTiepNhan1().equals("")) {
-			// s.type(Key.F4, Key.ALT);
+		sleep(2);
+		if (getSoTiepNhan1().length()==0) {
+			 s.type(Key.F4, Key.ALT);
 			setTestcaseStatus("PASS", "thông tin trên Màn hình Cập nhật thông tin HC là NULL");
 
 		} else {
-			// s.type(Key.F4, Key.ALT);
+			s.type(Key.F4, Key.ALT);
 			setTestcaseStatus("FAIL", "thông tin trên Màn hình Cập nhật thông tin HC # NULL");
 		}
 	}
@@ -57,6 +63,7 @@ public class TestFormCapNhatThongTinBenhNhan extends FormCapNhatThongTinHanhChin
 		TestLogger.info("Confirm sau khi nhấn Enter hệ thống sẽ hiển thị thông tin của bệnh nhân đó");
 		// BN NGUYEN VIET HAOASCR có stn: 1801000115
 		// MaBN: 18000100
+		s.type("u", Key.CTRL);
 		soTN = "1801000115";
 		dienSoTiepNhan1(soTN);
 		s.type(Key.ENTER);
@@ -493,11 +500,11 @@ public class TestFormCapNhatThongTinBenhNhan extends FormCapNhatThongTinHanhChin
 		TestLogger.info("[Cập nhật_Validate] Kiểm tra validate trường Nghề nghiệp");
 		TestLogger.info("Kiểm tra khả năng nhập vào trường Nghề nghiệp");
 		TestLogger.info("Hệ thống cho phép nhập text tìm kiếm Nghề nghiệp theo mã và tên");
-		dienNgheNghiep1("Sinh viên");
+		dienNgheNghiep1("Học sinh");
 		// click buttom Lưu
 		clickToaDo(882, 538);
 		sleep(2);
-		if (getNgheNghiep1().equalsIgnoreCase("Sinh viên")) {
+		if (getNgheNghiep1().equalsIgnoreCase("Học sinh")) {
 			// click tọa độ buttom sửa
 			clickToaDo(785, 539);
 			setTestcaseStatus("PASS", "Điền thông tin nghề nghiệp thành công");
@@ -674,12 +681,12 @@ public class TestFormCapNhatThongTinBenhNhan extends FormCapNhatThongTinHanhChin
 		TestLogger.info("[Cập nhật_Validate] Kiểm tra validate trường Quận/huyện");
 		TestLogger.info("Kiểm tra khả năng nhập vào trường Quận/huyện");
 		TestLogger.info("Hệ thống cho phép nhập text tìm kiếm Quận/huyện theo viết tắt và tên");
-		dienQuanHuyen1("Thành phố Cao Bằng");
+		dienQuanHuyen1("Thành Phố Bắc Kạn");
 		s.type(Key.ENTER);
 		// click buttom Lưu
 		clickToaDo(882, 538);
 		sleep(2);
-		if (getQuanHuyen1().equalsIgnoreCase("Thành phố Cao Bằng")) {
+		if (getQuanHuyen1().equalsIgnoreCase("Thành Phố Bắc Kạn")) {
 			// click tọa độ buttom sửa
 			clickToaDo(785, 539);
 			setTestcaseStatus("PASS", "Hệ thống cho phép nhập text tìm kiếm Quận/huyện theo viết tắt và tên");
@@ -718,12 +725,12 @@ public class TestFormCapNhatThongTinBenhNhan extends FormCapNhatThongTinHanhChin
 		TestLogger.info("[Cập nhật_Validate] Kiểm tra validate trường Phường/xã");
 		TestLogger.info("Kiểm tra khả năng nhập vào trường Phường/xã");
 		TestLogger.info("Hệ thống cho phép nhập text tìm kiếm Phường/xã theo viết tắt và tên");
-		dienPhuongXa1("Phường Sông Hiến");
+		dienPhuongXa1("Phường Sông Cầu");
 		s.type(Key.ENTER);
 		// click buttom Lưu
 		clickToaDo(882, 538);
 		sleep(2);
-		if (getPhuongXa1().equalsIgnoreCase("Phường Sông Hiến")) {
+		if (getPhuongXa1().equalsIgnoreCase("Phường Sông Cầu")) {
 			// click tọa độ buttom sửa
 			clickToaDo(785, 539);
 			setTestcaseStatus("PASS", "Hệ thống cho phép nhập text tìm kiếm Phường/xã theo viết tắt và tên");
@@ -950,7 +957,7 @@ public class TestFormCapNhatThongTinBenhNhan extends FormCapNhatThongTinHanhChin
 		// click buttom Lưu
 		clickToaDo(882, 538);
 		sleep(2);
-		if (getNoiLamViec1().equalsIgnoreCase("<script>alert(test)</script>")) {
+		if (getNoiLamViec1().equalsIgnoreCase("<script>alert(hoahoa)</script>")) {
 			// click tọa độ buttom sửa
 			clickToaDo(785, 539);
 			setTestcaseStatus("PASS", "Lưu thông tin thành công");
@@ -1058,7 +1065,7 @@ public class TestFormCapNhatThongTinBenhNhan extends FormCapNhatThongTinHanhChin
 		// click buttom Lưu
 		clickToaDo(882, 538);
 		sleep(2);
-		if (getNguoiLienHe1().equalsIgnoreCase("<script>alert(test)</script>")) {
+		if (getNguoiLienHe1().equalsIgnoreCase("<script>alert(hoahoa)</script>")) {
 			// click tọa độ buttom sửa
 			clickToaDo(785, 539);
 			setTestcaseStatus("PASS", "Lưu thông tin thành công");
@@ -1274,6 +1281,7 @@ public class TestFormCapNhatThongTinBenhNhan extends FormCapNhatThongTinHanhChin
 		TestLogger.info("Kiểm tra việc chỉ nhập ngày/tháng" + "Ex: nhập 10/12");
 		TestLogger.info("Confirm hệ thống hiển thị mặc định là năm hiện tại");
 		dienNgaySinh1("1012");
+		dienNamSinh1("");
 		// click buttom Lưu
 		clickToaDo(882, 538);
 		sleep(2);

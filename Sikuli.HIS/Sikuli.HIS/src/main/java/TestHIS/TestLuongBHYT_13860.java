@@ -106,18 +106,10 @@ public class TestLuongBHYT_13860 extends TiepNhanBenhNhan {
 		s.type(Key.TAB);
 
 		// 2.CHỌN ĐỐI TƯỢNG
-		TestLogger.info("Điền đối tượng");
-		DoiTuong = "BHYT 80%";
-		clickToaDo(218, 277);
-		waitForObjectPresent(TiepNhanBenhNhan_BHYT80, 5);
-		clickOn(TiepNhanBenhNhan_BHYT80);
-
-		s.type(Key.TAB);
-		sleep(5);
-		s.type(Key.TAB);
+		dienDoiTuong("BHYT 100%");
 
 		TestLogger.info("Điền hình thức khám");
-		HinhThuc = "Tự đến";
+		HinhThuc = "Cơ quan y tế giới thiệu";
 		chonHinhThuc(HinhThuc);
 		TestLogger.info("Chon lý do khám");
 		LiDo = "Khám bệnh";
@@ -130,7 +122,7 @@ public class TestLuongBHYT_13860 extends TiepNhanBenhNhan {
 
 		TestLogger.info("Dien ma dang ki KCBBD");
 		dienMaDKKCB("01005");
-		// s.type(Key.ENTER);
+		 s.type(Key.ENTER);
 
 		sleep(4);
 		TestLogger.info("chon khu vuc");
@@ -143,8 +135,10 @@ public class TestLuongBHYT_13860 extends TiepNhanBenhNhan {
 		s.type(Key.ENTER);
 
 		TestLogger.info("Chon den ngay");
-		dienDenNgay("30/12/2018");
-		s.type(Key.ENTER);
+		String denngay = TienIch.getNgayHienTaicuaMayTinh() + TienIch.getThangHienTaicuaMayTinh() + (Integer.parseInt(TienIch.getNamHienTaicuaMayTinh())+1);
+		TestLogger.info("den ngay la" +denngay);
+		dienDenNgay(denngay);
+		//s.type(Key.ENTER);
 		sleep(4);
 		s.type(Key.TAB);
 		sleep(3);
@@ -163,7 +157,7 @@ public class TestLuongBHYT_13860 extends TiepNhanBenhNhan {
 		s.type(Key.TAB);
 
 		TestLogger.info("Nhap tuyen chuyen");
-		dienTuyenChuyen("BV Bạch Mai");
+		dienTuyenChuyen("Tuyến dưới liền kề");
 		s.type(Key.TAB);
 
 		TestLogger.info("Nhap ly do chuyen");
@@ -192,10 +186,11 @@ public class TestLuongBHYT_13860 extends TiepNhanBenhNhan {
 
 		if (waitForObjectPresent(Phieukham, 5)) {
 			s.type(Key.F4, Key.ALT);
-			setTestcaseStatus("PASS", "Tiếp nhận Bệnh nhân thành công !");
-		} else {
-
-			setTestcaseStatus("FAIL", "Tiếp nhận Bệnh nhân không thành công !");
+			}
+		if(getHoten().equals("")) {
+			setTestcaseStatus("PASS", "Tiếp nhận bệnh nhân thành công");
+		}else {
+			setTestcaseStatus("FAIL", "Tiếp nhận bệnh nhân không thành công");
 		}
 	}
 
@@ -335,8 +330,8 @@ public class TestLuongBHYT_13860 extends TiepNhanBenhNhan {
 		// Log out tai khoan cu,
 		clickOn(TiepNhanBenhNhan_HeThong);
 		clickOn(TiepNhanBenhNhan_DangXuat);
-		clickOn(TiepNhanBenhNhan_HeThong);
-		clickOn(TiepNhanBenhNhan_DangNhap);
+		//clickOn(TiepNhanBenhNhan_HeThong);
+		//clickOn(TiepNhanBenhNhan_DangNhap);
 
 		// Dang nhap tai khoan BS01
 		dangNhapHIS(FormKhuVuc.ten_dangNhap_BS01, FormKhuVuc.matKhau_dangNhap_BS01);
@@ -424,7 +419,7 @@ public class TestLuongBHYT_13860 extends TiepNhanBenhNhan {
 		s.click();
 		waitForObjectPresent(FormKhamBenh.FormKhamBenh_NhapVien, 5);
 		clickOn(FormKhamBenh.FormKhamBenh_NhapVien);
-		;
+		
 		sleep(3);
 
 		s.type(Key.TAB);
@@ -437,10 +432,10 @@ public class TestLuongBHYT_13860 extends TiepNhanBenhNhan {
 
 		clickOn(FormKhamBenh.FormKhamBenh_LuuVaHoanThanh);
 		if (waitForObjectPresent(HisActions.HIS_LOI_UNGDUNG, 3)) {
-			s.type(Key.TAB);
-			setTestcaseStatus("FAILSE", "KHÔNG LƯU ĐƯỢC KẾT LUẬN, ĐÃ GẶP SỰ CỐ!");
+			s.type(Key.ENTER);
+			setTestcaseStatus("FAIL", "KHÔNG LƯU ĐƯỢC KẾT LUẬN, ĐÃ GẶP SỰ CỐ!");
 		} else {
-			setTestcaseStatus("TRUE", "LƯU KẾT LUẬN THÀNH CÔNG!");
+			setTestcaseStatus("PASS", "LƯU KẾT LUẬN THÀNH CÔNG!");
 		}
 	}
 	// thoat tai khoan BS01, dang nhap tai khoan THUNGAN01 để thu tiền bệnh nhân
@@ -469,9 +464,9 @@ public class TestLuongBHYT_13860 extends TiepNhanBenhNhan {
 			clickOn(FormXacNhanBaoHiemYTe.FormXacNhanBaoHiemYTe_Xacnhan);
 			if (waitForObjectPresent(FormXacNhanBaoHiemYTe.FormXacNhanBaoHiemYTe_dongy, 5)) {
 				s.type(Key.ENTER);
-				setTestcaseStatus("Pass", "Xac nhan BHYT thành cong!");
+				setTestcaseStatus("PASS", "Xac nhan BHYT thành cong!");
 			} else {
-				setTestcaseStatus("False", "Xac nhan BHYT khong thanh cong");
+				setTestcaseStatus("FAIL", "Xac nhan BHYT khong thanh cong");
 			}
 
 		}
@@ -483,9 +478,8 @@ public class TestLuongBHYT_13860 extends TiepNhanBenhNhan {
 			TestLogger.info("thanh toan vien phi");
 			waitForObjectPresent(MenuVienPhi, 5);
 			clickOn(HisActions.MenuVienPhi);
-			waitForObjectPresent(SubMenuThanhToanVienPhi, 4);
-			clickOn(HisActions.SubMenuThanhToanVienPhi);
-
+			moveMouseDownFromLogo(HisActions.MenuVienPhi, 20);
+			s.click();
 			vpnt.nhapChungTu();
 			sleep(4);
 			vpnt.dienSoTiepNhan(SoTiepNhan);

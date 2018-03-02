@@ -27,7 +27,7 @@ public class TestFormDanhSachBNCungSoTheBHYT extends FormDanhSachBNCungSoTheBHYT
 	String MaTN;
 	List<String> l;
 
-	@BeforeTest
+	//@BeforeTest
 	public void dieukienDauTien() {
 		if (his.khoiDongHIS(HisActions.DUONG_DAN_FILE_CHAY_HIS) == true) {
 			his.dangNhapHIS(FormKhuVuc.ten_dangNhap_admin, FormKhuVuc.matKhau_dangNhap_admin);
@@ -85,42 +85,8 @@ public class TestFormDanhSachBNCungSoTheBHYT extends FormDanhSachBNCungSoTheBHYT
 		s.type(Key.ENTER);
 		tnbn.dienMaDKKCB("01005");
 		sleep(2);
-		do {
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-			clickToaDo(1066, 551);
-
-		} while (!waitForObjectPresent(FormDanhSachCungBHYT_KhuVuc, 1));
+		keoThaDoiTuongTheoToaDo(390, 551, 1067, 551);
+		
 
 		String laymathe = layTextTuAnh(528, 174, 128, 17);
 		TestLogger.info("mã thẻ hiển thị là:" + laymathe);

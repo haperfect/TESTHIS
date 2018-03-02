@@ -35,6 +35,7 @@ public class FormCapNhatThongTinHanhChinh extends HisActions {
 	
 	
 	
+	
 
 	public void dienSoTiepNhan1(String soTN) {
 		waitForObjectPresent(FormCapNhatThongTinHanhChinh_TitleForm, 5);

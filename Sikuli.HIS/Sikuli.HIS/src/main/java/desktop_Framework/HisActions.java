@@ -72,8 +72,8 @@ public class HisActions extends CommonActions {
 		clickOn(TiepNhanBenhNhan_HeThong);
 		clickOn(TiepNhanBenhNhan_DangXuat);
 		waitForObjectPresent(TiepNhanBenhNhan_HeThong, 5);
-		clickOn(TiepNhanBenhNhan_HeThong);
-		clickOn(TiepNhanBenhNhan_DangNhap);
+		//clickOn(TiepNhanBenhNhan_HeThong);
+		//clickOn(TiepNhanBenhNhan_DangNhap);
 
 		// Dang nhap voi tai khoan THUNGAN01
 		dangNhapHIS(user, pass);

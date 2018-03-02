@@ -1,5 +1,6 @@
 package HIS;
 
+import org.sikuli.script.App;
 import org.sikuli.script.Key;
 import desktop_Framework.HisActions;
 import desktop_Framework.TestLogger;
@@ -68,7 +69,6 @@ public class TiepNhanBenhNhan extends HisActions {
 	public static String TiepNhanBenhNhan_NoiDKKCB = "TiepNhanBenhNhan_NoiDKKCB.png";
 	public static String TiepNhanBenhNhan_DisnableThem = "TiepNhanBenhNhan_DisnableThem.png";
 
-
 	// DANG KI KHAM
 	public static String TiepNhanBenhNhan_TenDichVu = "TiepNhanBenhNhan_TenDichVu.png";
 	public static String TiepNhanBenhNhan_NoiThucHien = "TiepNhanBenhNhan_NoiThucHien.png";
@@ -96,21 +96,19 @@ public class TiepNhanBenhNhan extends HisActions {
 	public static String HIS_VuiLongChoDoi = "HIS_VuiLongChoDoi.png";
 	public static String CanhBaoHoTen = "CanhBaoHoTen.png";
 	public static String AfterLoading = "AfterLoading.png";
-		// POPUP THONG BAO
+	// POPUP THONG BAO
 	public static String TiepNhanBenhNhan_MessageSDTNhoHon10 = "TiepNhanBenhNhan_MessageSDTNhoHon10.png";
-    public static String TiepNhanBenhNhan_Sua_Enable = "TiepNhanBenhNhan_Sua_Enable.png";
+	public static String TiepNhanBenhNhan_Sua_Enable = "TiepNhanBenhNhan_Sua_Enable.png";
 	// Loi pop-up
 	public static String Hochieu_cmnd = "Hochieu_cmnd.png";
 	public static String TiepNhanBenhNhan_UuTien_Unchecked = "TiepNhanBenhNhan_UuTien_Unchecked.png";
 	public static String TiepNhanBenhNhan_GioiTinhNamNuKhongXacDinh = "TiepNhanBenhNhan_GioiTinhNamNuKhongXacDinh.png";
 	public static String TiepNhanBenhNhan_GioiTinh_Radio_Checked = "TiepNhanBenhNhan_GioiTinh_Radio_Checked.png";
-    public static String TiepNhanBenhNhan_BHYTChiTra = "TiepNhanBenhNhan_BHYTChiTra.png";
+	public static String TiepNhanBenhNhan_BHYTChiTra = "TiepNhanBenhNhan_BHYTChiTra.png";
 	public static String TiepNhanBenhNhan_ThuTienSau_Uncheck = "TiepNhanBenhNhan_ThuTienSau_Uncheck.png";
 	public static String TiepNhanBenhNhan_ChuyenPhongKham = "TiepNhanBenhNhan_ChuyenPhongKham.png";
 	public static String TiepNhanBenhNhan_DanhSachBN = "TiepNhanBenhNhan_DanhSachBN.png";
 
-    
-	
 	public String getSoTiepNhan() {
 		setClipboardValue("");
 		moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_SoTiepNhan, 100);
@@ -120,41 +118,34 @@ public class TiepNhanBenhNhan extends HisActions {
 		String soTiepNhan = getClipboardValue();
 		return soTiepNhan;
 	}
-	
-	public void dienSoTiepNhan(String soTiepNhan)
-	{
+
+	public void dienSoTiepNhan(String soTiepNhan) {
 		moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_SoTiepNhan, 100);
 		s.click();
 		s.type(soTiepNhan);
 		s.type(Key.ENTER);
-		
-	}
-	
 
-	public void dienMaBenhNhan(String maBenhNhan)
-	{
+	}
+
+	public void dienMaBenhNhan(String maBenhNhan) {
 		moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_MaBenhNhan, 100);
 		s.type(maBenhNhan);
 		s.type(Key.ENTER);
-		
+
 	}
-	
-	
-	public String getMaBenhNhan()
-	{
+
+	public String getMaBenhNhan() {
 		setClipboardValue("");
 		moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_MaBenhNhan, 100);
 		s.click();
-		s.type("a",Key.CTRL);
-		s.type("c",Key.CTRL);
+		s.type("a", Key.CTRL);
+		s.type("c", Key.CTRL);
 		return getClipboardValue();
-		
+
 	}
-	
-	
 
 	public void dienHoTen(String Hoten) {
-		
+
 		waitForObjectPresent(TiepNhanBenhNhan_HoTen, 5);
 		moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_HoTen, 100);
 		s.click();
@@ -178,7 +169,7 @@ public class TiepNhanBenhNhan extends HisActions {
 	}
 
 	public void dienNgaySinh(String ngaysinh) {
-		
+
 		waitForObjectPresent(TiepNhanBenhNhan_NgaySinh, 5);
 		moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_NgaySinh, 100);
 		s.click();
@@ -209,7 +200,7 @@ public class TiepNhanBenhNhan extends HisActions {
 		s.type(Key.BACKSPACE);
 		s.type(namsinh);
 		s.type(Key.ENTER);
-		
+
 	}
 
 	public String getNamSinh() {
@@ -222,12 +213,10 @@ public class TiepNhanBenhNhan extends HisActions {
 		String namsinh = getClipboardValue();
 		return namsinh;
 	}
-	
 
 	public void dienSoCMTND(String soCMTND) {
 		/*
-		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_SoCMND, 100);
-		 * s.click();
+		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_SoCMND, 100); s.click();
 		 */
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
@@ -265,11 +254,10 @@ public class TiepNhanBenhNhan extends HisActions {
 	}
 
 	public void dienNgheNghiep(String nghenghiep) {
-		/*
-		 * waitForObjectPresent(TiepNhanBenhNhan_NgheNghiep, 5);
-		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_NgheNghiep, 100);
-		 * s.click();
-		 */
+		
+		 waitForObjectPresent(TiepNhanBenhNhan_NgheNghiep, 5);
+		  moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_NgheNghiep, 100); s.click();
+		 
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
 		setClipboardValue(nghenghiep);
@@ -292,8 +280,7 @@ public class TiepNhanBenhNhan extends HisActions {
 	public void dienDanToc(String dantoc) {
 		/*
 		 * waitForObjectPresent(TiepNhanBenhNhan_DanToc, 5);
-		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_DanToc, 100);
-		 * s.click();
+		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_DanToc, 100); s.click();
 		 */
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
@@ -540,8 +527,8 @@ public class TiepNhanBenhNhan extends HisActions {
 	public void dienSoDienThoaiNguoiLienHe(String SoDTnguoiLienHe) {
 		/*
 		 * waitForObjectPresent(TiepNhanBenhNhan_SoDienThoaiNguoiLienHe, 5);
-		 * moveMouseHorizontallyFromLogo(
-		 * TiepNhanBenhNhan_SoDienThoaiNguoiLienHe, 100); s.click();
+		 * moveMouseHorizontallyFromLogo( TiepNhanBenhNhan_SoDienThoaiNguoiLienHe, 100);
+		 * s.click();
 		 */
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
@@ -559,17 +546,19 @@ public class TiepNhanBenhNhan extends HisActions {
 	}
 
 	public void dienDoiTuong(String DoiTuongdichVu) {
-
+		App.setClipboard("");		
 		waitForObjectPresent(TiepNhanBenhNhan_DoiTuong, 5);
-		moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_DoiTuong, 100);
+		moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_DoiTuong, 100);		
 		s.click();
 		s.type("a", Key.CTRL);
 		sleep(1);
 		s.type(Key.DELETE);
-		setClipboardValue(DoiTuongdichVu);
+		App.setClipboard(DoiTuongdichVu);
+		//setClipboardValue(DoiTuongdichVu);
 		s.type("v", Key.CTRL);
-		/*s.type(DoiTuongdichVu);
-		sleep(2);*/
+		/*
+		 * s.type(DoiTuongdichVu); sleep(2);
+		 */
 		s.type(Key.ENTER);
 	}
 
@@ -637,7 +626,7 @@ public class TiepNhanBenhNhan extends HisActions {
 		s.type(Key.DELETE);
 		setClipboardValue(lido);
 		s.type("v", Key.CTRL);
-		s.type(Key.ENTER);
+		//s.type(Key.ENTER);
 	}
 
 	public String getLiDo() {
@@ -652,11 +641,11 @@ public class TiepNhanBenhNhan extends HisActions {
 	}
 
 	public void dienSoTheBHYT(String sotheBHYT) {
-		
+
 		waitForObjectPresent(TiepNhanBenhNhan_SoThe, 5);
 		moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_SoThe, 100);
 		s.click();
-		
+
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
 		s.type(sotheBHYT);
@@ -677,8 +666,7 @@ public class TiepNhanBenhNhan extends HisActions {
 	public void dienTuyen(String tuyen) {
 		/*
 		 * waitForObjectPresent(TiepNhanBenhNhan_Tuyen, 5);
-		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_Tuyen, 100);
-		 * s.click();
+		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_Tuyen, 100); s.click();
 		 */
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
@@ -707,7 +695,7 @@ public class TiepNhanBenhNhan extends HisActions {
 		s.type(Key.BACKSPACE);
 		setClipboardValue(noiGioiThieu);
 		s.type("v", Key.CTRL);
-		s.type(Key.ENTER);
+		//s.type(Key.ENTER);
 	}
 
 	public String getNoiGioiThieu() {
@@ -722,15 +710,14 @@ public class TiepNhanBenhNhan extends HisActions {
 	}
 
 	public void dienMaDKKCB(String MaDKKCB) {
-		
+
 		waitForObjectPresent(TiepNhanBenhNhan_MaDangKiKhamChuaBenhBanDau, 5);
-		moveMouseHorizontallyFromLogo(
-		TiepNhanBenhNhan_MaDangKiKhamChuaBenhBanDau, 100); 
+		moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_MaDangKiKhamChuaBenhBanDau, 100);
 		s.click();
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
 		s.type(MaDKKCB);
-		s.type(Key.ENTER);
+		//s.type(Key.ENTER);
 	}
 
 	public String getMaDKKCB() {
@@ -747,8 +734,7 @@ public class TiepNhanBenhNhan extends HisActions {
 	public void dienKhuVuc(String Khuvuc) {
 		/*
 		 * waitForObjectPresent(TiepNhanBenhNhan_KhuVuc, 5);
-		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_KhuVuc, 42);
-		 * s.click();
+		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_KhuVuc, 42); s.click();
 		 */
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
@@ -776,7 +762,7 @@ public class TiepNhanBenhNhan extends HisActions {
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
 		s.type(SoTuyenChuyen);
-		s.type(Key.ENTER);
+		//s.type(Key.ENTER);
 	}
 
 	public String getSoTuyenChuyen() {
@@ -793,8 +779,7 @@ public class TiepNhanBenhNhan extends HisActions {
 	public void dienNgayChuyen(String ngaychuyen) {
 		/*
 		 * waitForObjectPresent(TiepNhanBenhNhan_NgayChuyen, 5);
-		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_NgayChuyen, 100);
-		 * s.click();
+		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_NgayChuyen, 100); s.click();
 		 */
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
@@ -816,8 +801,7 @@ public class TiepNhanBenhNhan extends HisActions {
 	public void dienTuNgay(String tungay) {
 		/*
 		 * waitForObjectPresent(TiepNhanBenhNhan_TuNgay, 5);
-		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_TuNgay, 100);
-		 * s.click();
+		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_TuNgay, 100); s.click();
 		 */
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
@@ -835,17 +819,16 @@ public class TiepNhanBenhNhan extends HisActions {
 		return getClipboardValue();
 	}
 
-	public void dienDenNgay(String denngay) {
-		/*
-		 * waitForObjectPresent(TiepNhanBenhNhan_DenNgay, 5);
-		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_DenNgay, 100);
-		 * s.click();
-		 */
-		s.type("a", Key.CTRL);
-		s.type(Key.BACKSPACE);
-		s.type(denngay);
-		// s.type(Key.ENTER);
-	}
+		 public void dienDenNgay(String denngay) {
+			  
+			  waitForObjectPresent(TiepNhanBenhNhan_DenNgay, 5);
+			  moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_DenNgay, 100);
+			  s.click();
+			  s.type("a", Key.CTRL);
+			  s.type(Key.BACKSPACE);
+			  s.type(denngay);
+			//  s.type(Key.ENTER);
+			 }
 
 	public String getDenNgay() {
 
@@ -859,11 +842,10 @@ public class TiepNhanBenhNhan extends HisActions {
 	}
 
 	public void dienTuyenChuyen(String tuyenchuyen) {
-		/*
-		 * waitForObjectPresent(TiepNhanBenhNhan_TuyenChuyen, 5);
-		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_TuyenChuyen, 100);
-		 * s.click();
-		 */
+		
+		  waitForObjectPresent(TiepNhanBenhNhan_TuyenChuyen, 5);
+		  moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_TuyenChuyen, 100); s.click();
+		
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
 		setClipboardValue(tuyenchuyen);
@@ -885,8 +867,7 @@ public class TiepNhanBenhNhan extends HisActions {
 	public void dienNgayDu5Nam(String ngaydu5nam) {
 		/*
 		 * waitForObjectPresent(TiepNhanBenhNhan_NgayDu5Nam, 5);
-		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_NgayDu5Nam, 100);
-		 * s.click();
+		 * moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_NgayDu5Nam, 100); s.click();
 		 */
 		s.type("a", Key.CTRL);
 		s.type(Key.BACKSPACE);
@@ -938,7 +919,7 @@ public class TiepNhanBenhNhan extends HisActions {
 		sleep(2);
 		s.type(Key.ENTER);
 	}
-	
+
 	public void dienTenDichVu2(String tenDichVu) {
 		moveMouseDownFromLogo(TiepNhanBenhNhan_TenDichVu, 58);
 		s.click();
@@ -949,7 +930,7 @@ public class TiepNhanBenhNhan extends HisActions {
 		sleep(2);
 		s.type(Key.ENTER);
 	}
-	
+
 	public void dienTenDichVu3(String tenDichVu) {
 		moveMouseDownFromLogo(TiepNhanBenhNhan_TenDichVu, 84);
 		s.click();
@@ -1002,24 +983,22 @@ public class TiepNhanBenhNhan extends HisActions {
 
 		/*
 		 * if (YesorNo.equals("Yes")) { s.type(Key.SPACE); } else {
-		 * clickOnRegion(TiepNhanBenhNhan_ThuTienSau,
-		 * Checkbox_Checked_ThuTienSau, 200, 200);
+		 * clickOnRegion(TiepNhanBenhNhan_ThuTienSau, Checkbox_Checked_ThuTienSau, 200,
+		 * 200);
 		 * 
 		 * }
 		 */
 	}
-	
-	public void moRongKhungPhongKham ()
-	{
+
+	public void moRongKhungPhongKham() {
 		clickToaDo(1200, 289);
 	}
-	
-	public void thuHepKhungPhongKham () 
-	{
+
+	public void thuHepKhungPhongKham() {
 		clickToaDo(1201, 71);
 	}
-	
-		public void dienChanDoanNGT(String chanDoanNGT) {
+
+	public void dienChanDoanNGT(String chanDoanNGT) {
 		moveMouseHorizontallyFromLogo(TiepNhanBenhNhan_ChanDoanNGT, 65);
 		s.click();
 		s.type("a", Key.CTRL);
@@ -1039,6 +1018,5 @@ public class TiepNhanBenhNhan extends HisActions {
 		String chanDoanNGT = getClipboardValue();
 		return chanDoanNGT;
 	}
-
 
 }

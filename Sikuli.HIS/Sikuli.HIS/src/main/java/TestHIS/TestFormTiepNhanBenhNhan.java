@@ -32,7 +32,7 @@ public class TestFormTiepNhanBenhNhan extends TiepNhanBenhNhan {
 	HisActions his = new HisActions();
 	DanhSachBenhNhan dsbn = new DanhSachBenhNhan();
 
-	@BeforeTest
+	//@BeforeTest
 	public void dieukienDauTien() {
 		if (his.khoiDongHIS(HisActions.DUONG_DAN_FILE_CHAY_HIS) == true) {
 			his.dangNhapHIS(FormKhuVuc.ten_dangNhap_admin, FormKhuVuc.matKhau_dangNhap_admin);

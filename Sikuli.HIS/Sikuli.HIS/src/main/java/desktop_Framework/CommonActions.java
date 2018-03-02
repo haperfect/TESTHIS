@@ -48,16 +48,17 @@ public class CommonActions extends TienIch {
 	private static String spath = null;
 	public int timeoutOffer = 1;
 	public static Screen s = new Screen();
-  
 
-	
 	/*
 	 * ________________________ SYSTEM SECTION_______________________________
 	 */
 
 	/**
-	 * getResource: Return absolute path to file (image, excel ... in resource folder
-	 * @param resourceName  name of resource want to get absolute path
+	 * getResource: Return absolute path to file (image, excel ... in resource
+	 * folder
+	 * 
+	 * @param resourceName
+	 *            name of resource want to get absolute path
 	 * 
 	 * @author hanv
 	 * @updater: hanv
@@ -68,48 +69,52 @@ public class CommonActions extends TienIch {
 
 		tr2 = resource.toString().replace("file:/", "").replace("%20", " ").replace("/", "\\").replace("target", "@");
 		int l = tr2.indexOf("@");
-		spath = tr2.substring(0, l).replace("@", "") + "src\\main\\resources\\"+ resourceName;
+		spath = tr2.substring(0, l).replace("@", "") + "src\\main\\resources\\" + resourceName;
 
 		return spath;
 	}
-	 
-	
+
 	/**
 	 * Get clipboard
+	 * 
 	 * @return contain of clipboard as string
 	 */
-	public String getClipboardValue(){
+	public String getClipboardValue() {
 		String result = "";
 		try {
-			
+
 			Toolkit toolkit = Toolkit.getDefaultToolkit();
 			Clipboard clipboard = toolkit.getSystemClipboard();
 			result = (String) clipboard.getData(DataFlavor.stringFlavor);
-			
+
 		} catch (UnsupportedFlavorException | IOException e) {
 			TestLogger.error(e.toString());
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Set clipboard contains
-	 * @param contains The string will become clipboard 
+	 * 
+	 * @param contains
+	 *            The string will become clipboard
 	 */
-	public void setClipboardValue(String contains){
+	public void setClipboardValue(String contains) {
 		TestLogger.info("Set clipboard contains is " + contains);
 		StringSelection clipboardValue = new StringSelection(contains);
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Clipboard clipboard = toolkit.getSystemClipboard();
 		clipboard.setContents(clipboardValue, clipboardValue);
 	}
-	
+
 	/**
-	 * Get Absolute File Path 
+	 * Get Absolute File Path
+	 * 
 	 * @author hanv
-	 * @param file represent a File object 
-	 * @return a String , represent Absolute File Path of file 
-	 */ 
+	 * @param file
+	 *            represent a File object
+	 * @return a String , represent Absolute File Path of file
+	 */
 	public static String getAbsoluteFilePath(File file) {
 		String path = null;
 		if (file.exists()) {
@@ -121,9 +126,8 @@ public class CommonActions extends TienIch {
 
 		return path;
 	}
-	
-	public void clickToaDo(int X, int Y)
-	{
+
+	public void clickToaDo(int X, int Y) {
 		Location toado = new Location(X, Y);
 		try {
 			s.click(toado);
@@ -132,8 +136,38 @@ public class CommonActions extends TienIch {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+	public void keoThaDoiTuongTheoToaDo(int toaDoX1, int toaDoY1, int toaDoX2, int toaDoY2) {
+		Location toaDo1 = new Location(toaDoX1, toaDoY1);
+		Location toaDo2 = new Location(toaDoX2, toaDoY2);
+		try {
+			s.drag(toaDo1);
+			s.dropAt(toaDo2);
+			s.keyUp();
+		} catch (FindFailed e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void keoThaDoiTuong(String doiTuongCanKeoTha, String doiTuongDichCanThaDen) {
+
+		String doiTuongCanKeo = getResource(doiTuongCanKeoTha);
+		String doiTuongCanThaDen = getResource(doiTuongDichCanThaDen);
+
+		Match m;
+		try {
+			m = s.find(doiTuongCanKeo);
+			s.drag(m);
+			s.dropAt(doiTuongCanThaDen);
+		} catch (FindFailed e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 	/**
 	 * copy folder and all files contains
 	 */
@@ -178,7 +212,8 @@ public class CommonActions extends TienIch {
 	 * executeFile: Execute the exe file
 	 * 
 	 * @author hanv
-	 * @param path Path to exe file
+	 * @param path
+	 *            Path to exe file
 	 */
 	public void executeFile(String path) {
 		TestLogger.info("-- Execute exe file: " + path);
@@ -193,7 +228,7 @@ public class CommonActions extends TienIch {
 			}
 		}
 	}
-	
+
 	/**
 	 * Check
 	 * 
@@ -201,7 +236,7 @@ public class CommonActions extends TienIch {
 	 * @date 21/1/2016
 	 * 
 	 */
-	public boolean getDiff(File dirA, File dirB, boolean isIndentical){
+	public boolean getDiff(File dirA, File dirB, boolean isIndentical) {
 
 		File[] fileList1 = dirA.listFiles();
 		File[] fileList2 = dirB.listFiles();
@@ -214,8 +249,7 @@ public class CommonActions extends TienIch {
 				map1.put(fileList1[i].getName(), fileList1[i]);
 			}
 			isIndentical = compareNow(fileList2, map1, isIndentical);
-			} 
-		else {
+		} else {
 			map1 = new HashMap<String, File>();
 			for (int i = 0; i < fileList2.length; i++) {
 				map1.put(fileList2[i].getName(), fileList2[i]);
@@ -234,7 +268,7 @@ public class CommonActions extends TienIch {
 	 * @return true if files are same
 	 * 
 	 */
-	public boolean compareNow(File[] fileArr, HashMap<String, File> map, boolean isIndentical){
+	public boolean compareNow(File[] fileArr, HashMap<String, File> map, boolean isIndentical) {
 		for (int i = 0; i < fileArr.length; i++) {
 			String fName = fileArr[i].getName();
 			File fComp = map.get(fName);
@@ -295,8 +329,7 @@ public class CommonActions extends TienIch {
 		}
 		return isIndentical;
 	}
-	
-	
+
 	/**
 	 * @author hanv
 	 * @date 21/1/2016
@@ -325,14 +358,13 @@ public class CommonActions extends TienIch {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * <b>Check folder is empty or not </b>
 	 * 
 	 * @param file
 	 *            : folder
-	 * @return <b>True</b>: if folder is empty <b>False</b>: if folder doesn't
-	 *         empty
+	 * @return <b>True</b>: if folder is empty <b>False</b>: if folder doesn't empty
 	 * @author hanv
 	 */
 	public boolean isFolderEmpty(File file) {
@@ -346,14 +378,14 @@ public class CommonActions extends TienIch {
 				TestLogger.info("Folder : " + file.getAbsolutePath() + " is empty");
 		return flag;
 	}
-	
+
 	/**
 	 * <b>Check process name exist on task list or not </b>
 	 * 
 	 * @param processName
 	 *            : Name of process
-	 * @return <b>True</b>: if process exist on tasklist <b>False</b>: if
-	 *         process doesn't exist on tasklist
+	 * @return <b>True</b>: if process exist on tasklist <b>False</b>: if process
+	 *         doesn't exist on tasklist
 	 * @author hanv
 	 */
 	public boolean isProcessExists(String processName) {
@@ -382,7 +414,7 @@ public class CommonActions extends TienIch {
 		}
 		return flag;
 	}
-	
+
 	/**
 	 * Kill process on win
 	 * 
@@ -398,7 +430,7 @@ public class CommonActions extends TienIch {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Read text file from
 	 * 
@@ -423,8 +455,7 @@ public class CommonActions extends TienIch {
 		}
 		return "Total: " + count + "\n" + textContain;
 	}
-	
-	
+
 	public void writeContainToTextFile(String filePath, String content, boolean continueWrite) {
 
 		try {
@@ -447,6 +478,7 @@ public class CommonActions extends TienIch {
 
 	/**
 	 * Sleep
+	 * 
 	 * @author hanv
 	 * @param timeInSecond
 	 */
@@ -457,9 +489,10 @@ public class CommonActions extends TienIch {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Delete folder
+	 * 
 	 * @author hanv
 	 * @date 21/1/2016
 	 */
@@ -477,7 +510,7 @@ public class CommonActions extends TienIch {
 		folderPath.delete();
 		sleep(0.1);
 	}
-	
+
 	/**
 	 * Check file exist or not
 	 * 
@@ -495,12 +528,13 @@ public class CommonActions extends TienIch {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * setTestcaseStatus: Set testcase status as passed/failed
 	 * 
 	 * @author hanv
-	 * @param testcaseSatatus: PASSED/FAILED/SKIP
+	 * @param testcaseSatatus:
+	 *            PASSED/FAILED/SKIP
 	 * @param message:
 	 *            Message print when set test case status : PASSED/FAILED/SKIP
 	 */
@@ -525,9 +559,6 @@ public class CommonActions extends TienIch {
 			throw new SkipException("Skipping this Testcase due: " + message);
 		}
 	}
-	
-
-
 
 	/*
 	 * ________________________ SIKULI SECTION_______________________________
@@ -535,8 +566,10 @@ public class CommonActions extends TienIch {
 
 	/**
 	 * clickOn: simulator click on Windows
+	 * 
 	 * @author ha
-	 * @param image image name on resource
+	 * @param image
+	 *            image name on resource
 	 */
 	public void clickOn(String image) {
 		spath = getResource(image);
@@ -547,20 +580,27 @@ public class CommonActions extends TienIch {
 			TestLogger.warn("Cannot find control : " + image);
 		}
 	}
-	
+
 	/**
 	 * Wait for object appears on special region
-	 * @param rootImage  Object to get root coordinate
-	 * @param findImage  Object want to find on region
-	 * @param widthRegion  width of region want to find object
-	 * @param heighRegion height of region want to find object
-	 * @param timeOut time out in seconds
+	 * 
+	 * @param rootImage
+	 *            Object to get root coordinate
+	 * @param findImage
+	 *            Object want to find on region
+	 * @param widthRegion
+	 *            width of region want to find object
+	 * @param heighRegion
+	 *            height of region want to find object
+	 * @param timeOut
+	 *            time out in seconds
 	 * @return true if image found in region
 	 * 
 	 * @author hanv
 	 * @update 9 Jun, 2016
 	 */
-	public boolean waitForObjectAppearOnRegion(String rootImage, String findImage, int widthRegion, int heighRegion, int timeOut) {
+	public boolean waitForObjectAppearOnRegion(String rootImage, String findImage, int widthRegion, int heighRegion,
+			int timeOut) {
 		TestLogger.info("");
 		String fullRootImagePath = getResource(rootImage);
 		String fullFindImagePath = getResource(findImage);
@@ -573,7 +613,7 @@ public class CommonActions extends TienIch {
 			for (int count = 1; count <= waitTimes; count++) {
 				try {
 					coordinate = s.find(fullRootImagePath);
-					TestLogger.info("Toa do x,y cua anh goc :" + coordinate.x +" "+ coordinate.y); 
+					TestLogger.info("Toa do x,y cua anh goc :" + coordinate.x + " " + coordinate.y);
 					r = new Region(coordinate.x, coordinate.y, widthRegion, heighRegion);
 					r.find(fullFindImagePath);
 					TestLogger.info("Control is found on region! break");
@@ -589,7 +629,7 @@ public class CommonActions extends TienIch {
 		System.out.println("");
 		return isControlInRegion;
 	}
-	
+
 	/**
 	 * click on object on special region
 	 * 
@@ -624,7 +664,7 @@ public class CommonActions extends TienIch {
 			TestLogger.warn("cannot find image");
 		return isControlInRegionClicked;
 	}
-	
+
 	/**
 	 * Clean files on download folders
 	 * 
@@ -638,49 +678,48 @@ public class CommonActions extends TienIch {
 		String downloadFolderPath = System.getenv("USERPROFILE") + "\\Downloads\\";
 		File DownloadFolder = new File(downloadFolderPath);
 		for (File f : DownloadFolder.listFiles())
-			if ((f.getName().contains(fileName))&(!f.getName().contains("coccoc_vi.exe"))) {
+			if ((f.getName().contains(fileName)) & (!f.getName().contains("coccoc_vi.exe"))) {
 				TestLogger.info(f.getName());
 				f.delete();
 			}
 	}
-	
-	
-	public String layTextTuAnh(int toadoX,int toadoY,int chieudai, int chieurong)
-	{
-		  String Textresult= "" ;
-		  sleep(3);
-		  String imagePath = s.capture(toadoX, toadoY, chieudai, chieurong).getFile();
-		   
-		  File image = new File(imagePath);
-		  File image2 = new File("E:\\anhDaDuocChup.png");
-		  try {
-		   FileUtils.copyFile(image,image2);
-		  } catch (IOException e1) {
-		   // TODO Auto-generated catch block
-		   e1.printStackTrace();
-		  }
-		  
-		  ITesseract instance = new Tesseract();
-		  try {
-		   Textresult = instance.doOCR(image2);
-		   // Print out the text results
-		   System.out.println(Textresult);
-		  
-		  } catch (Exception e) {   
-		   System.out.println("Failed. Could not read the text from image file!");
-		  }
-		  
+
+	public String layTextTuAnh(int toadoX, int toadoY, int chieudai, int chieurong) {
+		String Textresult = "";
+		sleep(3);
+		String imagePath = s.capture(toadoX, toadoY, chieudai, chieurong).getFile();
+
+		File image = new File(imagePath);
+		File image2 = new File("E:\\anhDaDuocChup.png");
+		try {
+			FileUtils.copyFile(image, image2);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		ITesseract instance = new Tesseract();
+		try {
+			Textresult = instance.doOCR(image2);
+			// Print out the text results
+			System.out.println(Textresult);
+
+		} catch (Exception e) {
+			System.out.println("Failed. Could not read the text from image file!");
+		}
+
 		return Textresult;
-	
+
 	}
-	
+
 	/**
 	 * Move mouse and click on screen, where under the logo 200px
 	 * 
-	 * @param imageOfLogo  the name of image was captured
+	 * @param imageOfLogo
+	 *            the name of image was captured
 	 * @author hanv
 	 */
-	public void moveMouseDownFromLogo(String imageOfLogo, int distance){
+	public void moveMouseDownFromLogo(String imageOfLogo, int distance) {
 		String image = getResource(imageOfLogo);
 		if (waitForObjectPresent(imageOfLogo, 5)) {
 			try {
@@ -706,9 +745,9 @@ public class CommonActions extends TienIch {
 			captureSnapshot(screenShotPath, "MoveMouseError", 1);
 		}
 	}
-	
+
 	/**
-	 * Move mouse and click on screen, where next to the logo 
+	 * Move mouse and click on screen, where next to the logo
 	 * 
 	 * @param imageOfLogo
 	 *            the name of image was captured
@@ -717,33 +756,31 @@ public class CommonActions extends TienIch {
 	 */
 	public void moveMouseHorizontallyFromLogo(String imageOfLogo, int distance) {
 		String image = getResource(imageOfLogo);
-		if(waitForObjectPresent(imageOfLogo, 5)){
+		if (waitForObjectPresent(imageOfLogo, 5)) {
 			try {
 				Match coordinate = s.find(image);
 				s.mouseMove(coordinate);
 				sleep(1);
 				coordinate.x = coordinate.x + distance;
-				
+
 				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 				double width = screenSize.getWidth();
 				double newY = coordinate.x;
-				
-				if(width >= newY)
+
+				if (width >= newY)
 					s.mouseMove(coordinate);
 				else
 					TestLogger.warn("Cannot move mouse to new coordinate ");
 			} catch (FindFailed e) {
 				TestLogger.warn("ERROR: " + e);
 			}
-		}
-		else
-		{
+		} else {
 			TestLogger.info("Cannot find image on " + image);
 			String screenShotPath = System.getProperty("user.home") + "/Desktop/screenShot/";
 			captureSnapshot(screenShotPath, "MoveMouseError", 1);
 		}
 	}
-	
+
 	/**
 	 * Move mouse to special poison
 	 * 
@@ -769,7 +806,7 @@ public class CommonActions extends TienIch {
 			TestLogger.warn(e.toString());
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return current coordinate of mouse
@@ -779,10 +816,12 @@ public class CommonActions extends TienIch {
 		PointerInfo mouseLocation = MouseInfo.getPointerInfo();
 		return mouseLocation.getLocation();
 	}
-	
+
 	/**
-	 * Open files 
-	 * @param filePath: full path to files
+	 * Open files
+	 * 
+	 * @param filePath:
+	 *            full path to files
 	 */
 	public void openFile(String filePath) {
 		s.type(Key.WIN);
@@ -790,53 +829,51 @@ public class CommonActions extends TienIch {
 		s.type(filePath);
 		s.type(Key.ENTER);
 		sleep(1);
-		
+
 	}
 
 	/**
 	 * waitForObjectPresent: wait time to execute command
 	 * 
 	 * @author hanv
-	 * @param image wait image, unit: second
+	 * @param image
+	 *            wait image, unit: second
 	 */
-public Boolean waitForObjectPresent(String image, int timeout) {
-		
-		TestLogger.info("Wait for control like " + image + " appears on about " + timeout );
+	public Boolean waitForObjectPresent(String image, int timeout) {
+
+		TestLogger.info("Wait for control like " + image + " appears on about " + timeout);
 		Boolean isControlExist = false;
 		spath = getResource(image);
-		File objectImage  = new File(spath);
-		if(objectImage.exists()){
-			try{
+		File objectImage = new File(spath);
+		if (objectImage.exists()) {
+			try {
 				for (int i = 1; i <= timeout * 2; i++) {
 					try {
 						s.wait(spath, 1);
 						System.out.println(" Control appears! -> break wait for object");
 						isControlExist = true;
 						break;
-					}
-					catch (FindFailed e) {
-						double time = timeout - (i*0.5);
-						System.out.print( " . . "  + time );
+					} catch (FindFailed e) {
+						double time = timeout - (i * 0.5);
+						System.out.print(" . . " + time);
 						if (!e.toString().contains("can not find"))
 							TestLogger.warn(e.toString());
-					}
-					finally{
+					} finally {
 						sleep(0.5);
 					}
 				}
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				TestLogger.warn(e.toString());
 			}
 			System.out.println(" Stop waiting control appears");
-		}
-		else
-			TestLogger.warn("\n\nCannot find image at " + spath  + " on local machine, please check\n");
+		} else
+			TestLogger.warn("\n\nCannot find image at " + spath + " on local machine, please check\n");
 		return isControlExist;
 	}
-	
+
 	/**
 	 * Wait for object disappears on screen
+	 * 
 	 * @param image
 	 * @param timeout
 	 * @return true if object not found on screen
@@ -849,8 +886,8 @@ public Boolean waitForObjectPresent(String image, int timeout) {
 		for (int i = 1; i <= timeout * 2; i++) {
 			try {
 				s.wait(spath, 1);
-				double time = timeout - (i*0.5);
-				System.out.print( " . . " + time);
+				double time = timeout - (i * 0.5);
+				System.out.print(" . . " + time);
 				sleep(0.5);
 			} catch (FindFailed e) {
 				isControlExist = true;
@@ -862,16 +899,17 @@ public Boolean waitForObjectPresent(String image, int timeout) {
 
 	/**
 	 * Double -click: use mouse to double click
+	 * 
 	 * @author hanv
-	 * @param image image name
+	 * @param image
+	 *            image name
 	 */
 	public void doubleClick(String image) {
 		spath = getResource(image);
 		try {
 			s.doubleClick(spath);
 		} catch (FindFailed e) {
-			TestLogger.error("The control " + image
-					+ "Not exist, please check image");
+			TestLogger.error("The control " + image + "Not exist, please check image");
 		}
 	}
 
@@ -879,7 +917,8 @@ public Boolean waitForObjectPresent(String image, int timeout) {
 	 * rightlick: use mouse to right click
 	 * 
 	 * @author hanv
-	 * @param image image name
+	 * @param image
+	 *            image name
 	 */
 	public void rightClick(String image) {
 		spath = getResource(image);
@@ -890,8 +929,6 @@ public Boolean waitForObjectPresent(String image, int timeout) {
 		}
 	}
 
-	
-	
 	/**
 	 * Scroll to object
 	 * 
@@ -927,33 +964,27 @@ public Boolean waitForObjectPresent(String image, int timeout) {
 			TestLogger.info("Không thể hover lên ảnh, do không thể tìm thấy ảnh tương ứng !");
 		}
 	}
-	
-	public boolean findObjectInToaDo (String image, int x, int y,int chieuDai, int chieuRong) 
-	{
-		    spath = getResource(image);
-		    Boolean flag = false;
-	
-			Region r= new Region(x, y, chieuDai, chieuRong);
-			Match mat = null;
-			try {
-				mat = r.find(spath);
-				if (mat.x >0)
-				{
-					
-					return flag = true;
-				}
-				else
-				{
-					
-					return flag = false;
-				}
-			} catch (FindFailed e) {
-				// TODO Auto-generated catch block
-				TestLogger.info("Không tìm thấy đối tượng trong phân vùng đó ! ");
-			}
-			 return flag;	
-	}
-	
 
+	public boolean findObjectInToaDo(String image, int x, int y, int chieuDai, int chieuRong) {
+		spath = getResource(image);
+		Boolean flag = false;
+
+		Region r = new Region(x, y, chieuDai, chieuRong);
+		Match mat = null;
+		try {
+			mat = r.find(spath);
+			if (mat.x > 0) {
+
+				return flag = true;
+			} else {
+
+				return flag = false;
+			}
+		} catch (FindFailed e) {
+			// TODO Auto-generated catch block
+			TestLogger.info("Không tìm thấy đối tượng trong phân vùng đó ! ");
+		}
+		return flag;
+	}
 
 }

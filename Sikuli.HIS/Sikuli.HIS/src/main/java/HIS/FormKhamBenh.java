@@ -144,7 +144,7 @@ public class FormKhamBenh extends HisActions {
     
     public void dienTenThuoc(String tenthuoc)
     {
-    	moveMouseDownFromLogo(TenThuoc, 35);
+    	moveMouseDownFromLogo(TenThuoc, 53);
     	s.click();
     	setClipboardValue(tenthuoc);
     	s.type("v",Key.CTRL);
@@ -371,7 +371,7 @@ public class FormKhamBenh extends HisActions {
 		return getClipboardValue();		
 	}
 	public void dienLieuDung(String lieuDung) {
-		moveMouseDownFromLogo(FormKhamBenh_LieuDung, 33);
+		moveMouseDownFromLogo(FormKhamBenh_LieuDung, 55);
 		s.click();
 		s.type("a",Key.CTRL);
 		s.type(Key.DELETE);
